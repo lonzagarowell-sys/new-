@@ -1,20 +1,8 @@
-import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
 export default function Navbar() {
   const { user, logout, isAdmin } = useAuth();
-  const navigate = useNavigate();
-
-  // handle logout + redirect
-  const handleLogout = async () => {
-    try {
-      await logout();           // sign out (from AuthContext)
-      navigate("/login");       // instantly go to login page
-    } catch (err) {
-      console.error("Logout error:", err);
-    }
-  };
 
   return (
     <nav className="bg-blue-800 text-white px-6 py-3 shadow-md">
@@ -31,17 +19,8 @@ export default function Navbar() {
             <>
               <Link to="/profile" className="px-3 py-1 rounded bg-blue-600">Profile</Link>
               <Link to="/files" className="px-3 py-1 rounded bg-green-600">Files</Link>
-              {isAdmin && (
-                <Link to="/notifications" className="px-3 py-1 rounded bg-purple-500 text-white">
-                  Admin
-                </Link>
-              )}
-              <button
-                onClick={handleLogout}
-                className="px-3 py-1 rounded bg-red-500 hover:bg-red-600"
-              >
-                Logout
-              </button>
+              {isAdmin && <Link to="/notifications" className="px-3 py-1 rounded bg-orchid-400 text-white">Admin</Link>}
+              <button onClick={() => logout()} className="px-3 py-1 rounded bg-red-500">Logout</button>
             </>
           ) : (
             <>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { uploadToCloudinary } from "../../services/cloudinary";
 import { addDoc, collection } from "firebase/firestore";
 import { db, auth } from "../../firebase";
